@@ -1,0 +1,7 @@
+{
+  "name": "CandyMachine_LocalLogger",
+  "version": "0.0.1",
+  "dependencies": {
+    "serialport": "1.2.4"
+  }
+}

@@ -1,0 +1,30 @@
+@import 'lib/_reset.scss';
+
+body {
+	font-family: 'Gill Sans';
+}
+
+.machine {
+	width: 45%;
+	height: 0;
+	padding-bottom: 50%;
+	margin: 2% 0 0 0;
+	background: url('../img/machine.svg') no-repeat center center;
+	background-size: contain; 
+
+	span {
+		display: block;
+		text-align: center;
+		margin: 10%;
+		font-size: 175px;
+	}
+
+	&.left {
+		float: left;
+		margin-right: 5%;
+	}
+	&.right {
+		float: right;
+		margin-left: 5%;
+	}
+}

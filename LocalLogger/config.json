@@ -1,0 +1,8 @@
+{
+	"server": {
+		"host": "localhost",
+		"port": 8080,
+		"path": "/log"
+	},
+	"device": "/dev/tty.usbmodem1411"
+}
