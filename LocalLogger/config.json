@@ -1,8 +1,8 @@
 {
 	"server": {
-		"host": "localhost",
-		"port": 8080,
+		"host": "candymachine.adfero.com",
+		"port": 80,
 		"path": "/log"
 	},
-	"device": "/dev/tty.usbmodem1411"
+	"device": "/dev/tty.usbmodem1421"
 }

@@ -14,7 +14,7 @@ $(document).ready(function() {
 		}
 	});
 
-	this.socket = io.connect('http://localhost:8080');
+	this.socket = io.connect('http://candymachine.adfero.com');
 	this.socket.on('totals',function(totals) {
 		parseTotals(totals);
 	});

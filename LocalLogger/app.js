@@ -14,20 +14,26 @@ var serialPort = new serialport.SerialPort(config.device, {
 serialPort.on('open', function () {
   console.log('open');
   serialPort.on('data', function(data) {
+    var safeData = data.replace('\r','').replace('\n','');
+    var payload = JSON.stringify({data:safeData});
+
     var req = http.request({
       host: config.server.host,
       port: config.server.port,
       path: config.server.path,
-      method: 'PUT'
+      method: 'PUT',
+      headers: {
+        'Content-length': payload.length
+      }
     },function(res) {
       console.log('Logged "' + data + '"');
     });
     req.on('error', function(e) {
       console.log('problem with request: ' + e.message);
     });
-    var safeData = data.replace('\r','').replace('\n','');
+    
     req.setHeader('Content-type','application/json');
-    req.write(JSON.stringify({data:safeData}));
+    req.write(payload);
     req.end();
   });
 });
