@@ -48,7 +48,28 @@ app.get('/totals', function(req,res) {
 			res.send(500);
 		}
 	})
-})
+});
+
+app.get('/histogram/:type', function(req,res) {
+	if (req.params.type
+		&& req.query.start 
+		&& req.query.end 
+		&& req.query.step 
+		&& req.query.start > 0 
+		&& req.query.end > 0 
+		&& req.query.step > 0) {
+		database.buildHistogram(req.params.type,parseInt(req.query.start),parseInt(req.query.end),parseInt(req.query.step),function(hist) {
+			if (hist) {
+				res.setHeader('Content-type','application/json');
+				res.send(hist);
+			} else {
+				res.send(500);
+			}
+		});
+	} else {
+		res.send(500);
+	}
+});
 
 database.connect(function() {
 	var server = http.createServer(app).listen(config.express.port, function(){

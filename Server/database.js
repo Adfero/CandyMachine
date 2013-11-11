@@ -52,3 +52,48 @@ exports.getTotals = function(callback) {
 		}
 	});
 }
+
+exports.buildHistogram = function(type,start,end,step,callback) {
+	if (type == 'all') {
+		type = [
+			{'type':'left'},
+			{'type':'right'}
+		];
+	} else {
+		type = [
+			{'type':type}
+		];
+	}
+	console.log(start);
+	logCollection.find({
+		'$or': type,
+		'stamp': {
+			'$gte': start,
+			'$lte': end
+		}
+	},{
+		'sort': {
+			'stamp': 1
+		}
+	}).toArray(function(err, docs) {
+		var date = start;
+		var hist = {};
+		var offset = 0;
+		while(date <= end) {
+			hist[date] = {};
+			for(var i=0;i<type.length;i++) {
+				hist[date][type[i].type] = [];
+			}
+			while(offset < docs.length) {
+				if (docs[offset].stamp < (date+step)) {
+					hist[date][docs[offset].type].push(docs[offset]);
+				} else {
+					break;
+				}
+				offset++;
+			}
+			date += step;
+		}
+		callback(hist);
+	});
+}

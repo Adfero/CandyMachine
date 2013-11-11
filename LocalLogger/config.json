@@ -4,5 +4,5 @@
 		"port": 80,
 		"path": "/log"
 	},
-	"device": "/dev/tty.usbmodem1421"
+	"device": "/dev/tty.usbmodem1411"
 }
